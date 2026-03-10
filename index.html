@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GERARDO_VAZQUEZ_OS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- BOOT / CMD -->
+<section id="boot">
+  <video
+    src="assets/video/cara.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  ></video>
+
+  <pre class="cmd"><span id="cmd-text"></span><span class="cursor">_</span></pre>
+</section>
+
+<!-- DESKTOP XP (FASE 2 PLACEHOLDER) -->
+<section id="desktop" hidden>
+  <div class="xp-desktop">
+    <h1>Windows XP</h1>
+    <p>Aquí va tu CV completo, portafolio e interfaz.</p>
+  </div>
+</section>
+
+<script>
+/* ================================
+   TEXTO DEL BOOT (TU INFORMACIÓN)
+================================ */
+
+const text = `
+GERARDO_VAZQUEZ_OS v1.0
+--------------------------------
+Inicializando sistema...
+Cargando perfil...
+
+USUARIO: Gerardo Vázquez
+ROL: Diseñador Gráfico / Web
+
+RESUMEN:
+- Experiencia en diseño gráfico para imprenta
+- Desarrollo de páginas web básicas
+- Creación de material visual para negocios
+- Enfoque en diseño funcional y correcta producción
+
+Sistema listo.
+
+C:\\> PRESIONA ENTER O HAZ CLIC PARA INICIAR EL SISTEMA
+
+Optimizado para PC.
+En móvil usar orientación vertical.
+`;
+
+/* ================================
+   EFECTO DE ESCRITURA
+================================ */
+
+const speed = 12; // ms por carácter (rápido)
+let index = 0;
+let hasEntered = false;
+
+const cmdText = document.getElementById("cmd-text");
+const boot = document.getElementById("boot");
+const desktop = document.getElementById("desktop");
+
+function typeText() {
+  if (index < text.length) {
+    cmdText.textContent += text.charAt(index);
+    index++;
+    setTimeout(typeText, speed);
+  }
+}
+
+typeText();
+
+/* ================================
+   ENTRAR AL SISTEMA
+================================ */
+
+function enterSystem() {
+  if (hasEntered) return;
+  hasEntered = true;
+
+  document.getElementById("boot").classList.add("exit");
+
+  setTimeout(() => {
+    window.location.href = "desktop.html";
+  }, 600);
+}
+
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter") enterSystem();
+});
+
+document.addEventListener("click", enterSystem);
+</script>
+
+</body>
+</html>
